@@ -35,7 +35,7 @@
 
     header {
       text-align: center;
-      margin: 24px 0 16px;
+      margin: 24px 0 20px;
     }
 
     .animated-title {
@@ -46,9 +46,9 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       animation: gradientShift 3s ease-in-out infinite;
-      text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+      text-shadow: 0 0 12px rgba(0, 204, 255, 0.6);
     }
 
     @keyframes gradientShift {
@@ -58,7 +58,7 @@
     }
 
     .subtitle {
-      color: #4fc3f7; /* azzurro scuro */
+      color: #4fc3f7;
       font-size: 1.05em;
       font-weight: 500;
       margin-bottom: 12px;
@@ -68,7 +68,7 @@
       text-align: center;
       color: var(--text-secondary);
       font-size: 0.95em;
-      margin: 14px 0;
+      margin: 14px 0 18px;
     }
 
     textarea {
@@ -90,8 +90,19 @@
       box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.2);
     }
 
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .btn-group button {
+      flex: 1;
+      min-width: 140px;
+    }
+
     button {
-      width: 100%;
       padding: 14px;
       font-size: 17px;
       font-weight: 600;
@@ -110,15 +121,34 @@
       background: var(--primary-hover);
     }
 
+    #clearBtn {
+      background: #555;
+      color: white;
+    }
+
+    #clearBtn:hover {
+      background: #666;
+    }
+
     #copyBtn {
       background: var(--success);
       color: #000;
-      margin-top: 16px;
       display: none;
     }
 
     #copyBtn:hover {
       background: var(--success-hover);
+    }
+
+    #newLinkBtn {
+      background: #555;
+      color: white;
+      margin-top: 12px;
+      display: none;
+    }
+
+    #newLinkBtn:hover {
+      background: #666;
     }
 
     .result {
@@ -149,6 +179,14 @@
       body {
         padding: 16px;
       }
+      .btn-group {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .btn-group button {
+        min-width: auto;
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -162,13 +200,18 @@
   </header>
 
   <textarea id="inputUrl" placeholder="Incolla qui il link da Instagram, TikTok, Facebook o YouTube..."></textarea>
-  <button id="cleanBtn" onclick="cleanUrl()">Pulisci il link</button>
+
+  <div class="btn-group">
+    <button id="cleanBtn" onclick="cleanUrl()">Pulisci il link</button>
+    <button id="clearBtn" onclick="clearFields()">Pulisci campi</button>
+  </div>
 
   <div id="result" class="result"></div>
   <button id="copyBtn" onclick="copyResult()">Copia link pulito</button>
+  <button id="newLinkBtn" onclick="location.reload()">Nuovo link</button>
 
   <div class="footer">
-    🔒 Nessun dato verrà tracciato. Tutto avviene nel browser.
+    🔒 Nessun dato lascia il tuo dispositivo. Tutto avviene nel browser.
   </div>
 
   <script>
@@ -198,7 +241,7 @@
       youtube: {
         hostIncludes: ['youtube.com', 'youtu.be'],
         removeParams: [
-          'si', 'feature', 't', 'pp', 'vq', 'cbrd', 'gws_rd', 'hl', 'gl', 'disable_polymer',
+          'si', 'feature', 'pp', 'vq', 'cbrd', 'gws_rd', 'hl', 'gl', 'disable_polymer',
           'bpctr', 'pbj', 'ucbcb', 'has_verified', 'embeds_referring_euri',
           'utm_*', 'fbclid'
         ]
@@ -258,6 +301,7 @@
         resultEl.textContent = clean;
         resultEl.style.display = 'block';
         document.getElementById('copyBtn').style.display = 'block';
+        document.getElementById('newLinkBtn').style.display = 'block';
       } catch (e) {
         alert('⚠️ URL non valido. Assicurati che inizi con "https://".');
       }
@@ -278,7 +322,21 @@
         prompt('Copia manualmente:', text);
       });
     }
+
+    function clearFields() {
+      document.getElementById('inputUrl').value = '';
+      const resultEl = document.getElementById('result');
+      resultEl.style.display = 'none';
+      resultEl.textContent = '';
+      document.getElementById('copyBtn').style.display = 'none';
+      document.getElementById('newLinkBtn').style.display = 'none';
+      document.getElementById('inputUrl').focus();
+    }
   </script>
 </body>
 </html>
+
+
+</html>
+
 
