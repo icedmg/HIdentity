@@ -133,22 +133,12 @@
     #copyBtn {
       background: var(--success);
       color: #000;
+      margin-top: 16px;
       display: none;
     }
 
     #copyBtn:hover {
       background: var(--success-hover);
-    }
-
-    #newLinkBtn {
-      background: #555;
-      color: white;
-      margin-top: 12px;
-      display: none;
-    }
-
-    #newLinkBtn:hover {
-      background: #666;
     }
 
     .result {
@@ -202,13 +192,12 @@
   <textarea id="inputUrl" placeholder="Incolla qui il link da Instagram, TikTok, Facebook o YouTube..."></textarea>
 
   <div class="btn-group">
-    <button id="cleanBtn" onclick="cleanUrl()">Pulisci il link</button>
+    <button id="cleanBtn" onclick="cleanUrl()">Anonimizza link</button>
     <button id="clearBtn" onclick="clearFields()">Pulisci campi</button>
   </div>
 
   <div id="result" class="result"></div>
   <button id="copyBtn" onclick="copyResult()">Copia link pulito</button>
-  <button id="newLinkBtn" onclick="location.reload()">Nuovo link</button>
 
   <div class="footer">
     🔒 Nessun dato lascia il tuo dispositivo. Tutto avviene nel browser.
@@ -301,7 +290,6 @@
         resultEl.textContent = clean;
         resultEl.style.display = 'block';
         document.getElementById('copyBtn').style.display = 'block';
-        document.getElementById('newLinkBtn').style.display = 'block';
       } catch (e) {
         alert('⚠️ URL non valido. Assicurati che inizi con "https://".');
       }
@@ -329,14 +317,11 @@
       resultEl.style.display = 'none';
       resultEl.textContent = '';
       document.getElementById('copyBtn').style.display = 'none';
-      document.getElementById('newLinkBtn').style.display = 'none';
       document.getElementById('inputUrl').focus();
     }
   </script>
 </body>
 </html>
 
-
-</html>
 
 
