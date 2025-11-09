@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HIdentity</title>
   <style>
     :root {
@@ -133,12 +133,17 @@
     #copyBtn {
       background: var(--success);
       color: #000;
-      margin-top: 16px;
       display: none;
     }
 
     #copyBtn:hover {
       background: var(--success-hover);
+    }
+
+    .copy-btn-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
     }
 
     .result {
@@ -166,13 +171,16 @@
       .animated-title {
         font-size: 2em;
       }
+
       body {
         padding: 16px;
       }
+
       .btn-group {
         flex-direction: column;
         gap: 10px;
       }
+
       .btn-group button {
         min-width: auto;
         width: 100%;
@@ -189,15 +197,21 @@
     </div>
   </header>
 
-  <textarea id="inputUrl" placeholder="Incolla qui il link da Instagram, TikTok, Facebook o YouTube..."></textarea>
+  <textarea
+    id="inputUrl"
+    placeholder="Incolla qui il link da Instagram, TikTok, Facebook o YouTube..."
+  ></textarea>
 
   <div class="btn-group">
-    <button id="cleanBtn" onclick="cleanUrl()">Anonimizza link</button>
+    <button id="cleanBtn" onclick="cleanUrl()">Pulisci il link</button>
     <button id="clearBtn" onclick="clearFields()">Pulisci campi</button>
   </div>
 
   <div id="result" class="result"></div>
-  <button id="copyBtn" onclick="copyResult()">Copia link pulito</button>
+
+  <div class="copy-btn-container">
+    <button id="copyBtn" onclick="copyResult()">Copia link pulito</button>
+  </div>
 
   <div class="footer">
     🔒 Nessun dato lascia il tuo dispositivo. Tutto avviene nel browser.
@@ -208,31 +222,82 @@
       instagram: {
         hostIncludes: ['instagram.com'],
         removeParams: [
-          'igsh', 'igshid', 'ig_rid', '_nc_*', 'efg', 'oh', 'oe', 's', 'sh', 't', 'hash',
-          'attribution_id', 'fbclid', 'utm_*'
+          'igsh',
+          'igshid',
+          'ig_rid',
+          '_nc_*',
+          'efg',
+          'oh',
+          'oe',
+          's',
+          'sh',
+          't',
+          'hash',
+          'attribution_id',
+          'fbclid',
+          'utm_*'
         ]
       },
       tiktok: {
         hostIncludes: ['tiktok.com'],
         removeParams: [
-          '_r', 'ttclid', 'refer', 'is_from_webapp', 'sender_device', 'sender_web_id',
-          'web_id', 'device_id', 'language', 'source', 'sec_uid', 'share_app_id',
-          'share_item_id', 'share_link_id', 'utm_*', 'fbclid'
+          '_r',
+          'ttclid',
+          'refer',
+          'is_from_webapp',
+          'sender_device',
+          'sender_web_id',
+          'web_id',
+          'device_id',
+          'language',
+          'source',
+          'sec_uid',
+          'share_app_id',
+          'share_item_id',
+          'share_link_id',
+          'utm_*',
+          'fbclid'
         ]
       },
       facebook: {
         hostIncludes: ['facebook.com', 'fb.com'],
         removeParams: [
-          'fbclid', 'ref', '__tn__', 'fref', 'refsrc', 'hc_location', 'pnref', 'eid',
-          'sid', 'gs_l', 'cmp', 'mibextid', 'rdid', 'share_source', 'utm_*'
+          'fbclid',
+          'ref',
+          '__tn__',
+          'fref',
+          'refsrc',
+          'hc_location',
+          'pnref',
+          'eid',
+          'sid',
+          'gs_l',
+          'cmp',
+          'mibextid',
+          'rdid',
+          'share_source',
+          'utm_*'
         ]
       },
       youtube: {
         hostIncludes: ['youtube.com', 'youtu.be'],
         removeParams: [
-          'si', 'feature', 'pp', 'vq', 'cbrd', 'gws_rd', 'hl', 'gl', 'disable_polymer',
-          'bpctr', 'pbj', 'ucbcb', 'has_verified', 'embeds_referring_euri',
-          'utm_*', 'fbclid'
+          'si',
+          'feature',
+          'pp',
+          'vq',
+          'cbrd',
+          'gws_rd',
+          'hl',
+          'gl',
+          'disable_polymer',
+          'bpctr',
+          'pbj',
+          'ucbcb',
+          'has_verified',
+          'embeds_referring_euri',
+          'utm_*',
+          'fbclid'
         ]
       }
     };
@@ -299,16 +364,19 @@
       const text = document.getElementById('result').textContent;
       if (!text) return;
 
-      navigator.clipboard.writeText(text).then(() => {
-        const btn = document.getElementById('copyBtn');
-        const original = btn.textContent;
-        btn.textContent = '✅ Copiato!';
-        setTimeout(() => {
-          btn.textContent = original;
-        }, 1500);
-      }).catch(() => {
-        prompt('Copia manualmente:', text);
-      });
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          const btn = document.getElementById('copyBtn');
+          const original = btn.textContent;
+          btn.textContent = '✅ Copiato!';
+          setTimeout(() => {
+            btn.textContent = original;
+          }, 1500);
+        })
+        .catch(() => {
+          prompt('Copia manualmente:', text);
+        });
     }
 
     function clearFields() {
@@ -322,6 +390,7 @@
   </script>
 </body>
 </html>
+
 
 
 
